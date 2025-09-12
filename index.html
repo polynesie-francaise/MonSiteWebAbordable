@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grossiste Alimentaire Pro - Votre partenaire alimentaire</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c5530 0%, #4a7c59 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #a8d5ba;
+        }
+
+        /* Menu mobile */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main content */
+        main {
+            margin-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 85, 48, 0.8), rgba(74, 124, 89, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f4f0" width="1200" height="600"/><circle fill="%234a7c59" cx="200" cy="150" r="50" opacity="0.3"/><circle fill="%232c5530" cx="800" cy="300" r="80" opacity="0.2"/><circle fill="%23a8d5ba" cx="1000" cy="100" r="60" opacity="0.4"/></svg>');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 8rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: bold;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 0;
+            background: #f8fdf8;
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c5530;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Produits Section */
+        .products {
+            padding: 6rem 0;
+        }
+
+        .products h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c5530;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(45deg, #4a7c59, #a8d5ba);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            color: #2c5530;
+        }
+
+        /* Promotions Section */
+        .promotions {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            text-align: center;
+        }
+
+        .promotions h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .promo-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .promo-highlight {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Actualités Section */
+        .news {
+            padding: 6rem 0;
+            background: #f8fdf8;
+        }
+
+        .news h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c5530;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .news-date {
+            background: #2c5530;
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: #2c5530;
+            color: white;
+        }
+
+        .contact h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            font-size: 1.1rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1rem;
+            color: #a8d5ba;
+        }
+
+        .contact-item {
+            margin-bottom: 1rem;
+        }
+
+        .horaires {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4a7c59;
+        }
+
+        .submit-btn {
+            background: #4a7c59;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #2c5530;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a3a1e;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #a8d5ba;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #a8d5ba;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 1rem;
+            text-align: center;
+            color: #999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #2c5530;
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .services h2,
+            .products h2,
+            .promotions h2,
+            .news h2,
+            .contact h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Styles pour les données CMS */
+        .cms-editable {
+            position: relative;
+        }
+
+        /* Animation de scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Bouton de retour en haut */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #4a7c59;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            background: #2c5530;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="header-content">
+            <div class="logo cms-editable" data-cms-field="site.name">
+                Grossiste Alimentaire Pro
+            </div>
+            <nav>
+                <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+                <ul id="nav-menu">
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#produits">Produits</a></li>
+                    <li><a href="#promotions">Promotions</a></li>
+                    <li><a href="#actualites">Actualités</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section Accueil -->
+        <section id="accueil" class="hero">
+            <div class="container">
+                <h1 class="cms-editable" data-cms-field="hero.title">
+                    Votre Partenaire Grossiste Alimentaire de Confiance
+                </h1>
+                <p class="cms-editable" data-cms-field="hero.description">
+                    Depuis plus de 20 ans, nous fournissons restaurants, épiceries et collectivités 
+                    avec des produits alimentaires de qualité supérieure. Livraison rapide, 
+                    prix compétitifs, service client exceptionnel.
+                </p>
+                <a href="#contact" class="cta-button">
+                    <span class="cms-editable" data-cms-field="hero.cta_text">Demander un devis</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Section Services -->
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="cms-editable" data-cms-field="services.title">Nos Services</h2>
+                <div class="services-grid">
+                    <div class="service-card cms-editable" data-cms-collection="services" data-cms-item="0">
+                        <div class="service-icon">🚚</div>
+                        <h3>Livraison Rapide</h3>
+                        <p>Livraison gratuite sous 24h pour toute commande supérieure à 150€. 
+                           Service de livraison express disponible.</p>
+                    </div>
+                    <div class="service-card cms-editable" data-cms-collection="services" data-cms-item="1">
+                        <div class="service-icon">🏪</div>
+                        <h3>Large Gamme</h3>
+                        <p>Plus de 5000 références disponibles : produits frais, surgelés, 
+                           épicerie fine, boissons et produits d'hygiène.</p>
+                    </div>
+                    <div class="service-card cms-editable" data-cms-collection="services" data-cms-item="2">
+                        <div class="service-icon">💰</div>
+                        <h3>Prix Compétitifs</h3>
+                        <p>Tarifs dégressifs selon les volumes, remises fidélité et offres 
+                           spéciales pour nos clients professionnels.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Produits -->
+        <section id="produits" class="products">
+            <div class="container">
+                <h2 class="cms-editable" data-cms-field="products.title">Notre Catalogue</h2>
+                <div class="products-grid">
+                    <div class="product-card cms-editable" data-cms-collection="products" data-cms-item="0">
+                        <div class="product-image">🥩</div>
+                        <div class="product-info">
+                            <h3>Viandes & Charcuterie</h3>
+                            <p>Sélection premium de viandes fraîches et charcuterie artisanale. 
+                               Traçabilité garantie, labels qualité.</p>
+                        </div>
+                    </div>
+                    <div class="product-card cms-editable" data-cms-collection="products" data-cms-item="1">
+                        <div class="product-image">🥛</div>
+                        <div class="product-info">
+                            <h3>Produits Laitiers</h3>
+                            <p>Fromages d'exception, yaourts, crèmes et beurres de producteurs 
+                               locaux et internationaux.</p>
+                        </div>
+                    </div>
+                    <div class="product-card cms-editable" data-cms-collection="products" data-cms-item="2">
+                        <div class="product-image">🥖</div>
+                        <div class="product-info">
+                            <h3>Boulangerie & Pâtisserie</h3>
+                            <p>Pains artisanaux, viennoiseries et pâtisseries. 
+                               Produits surgelés et frais, prêts à servir.</p>
+                        </div>
+                    </div>
+                    <div class="product-card cms-editable" data-cms-collection="products" data-cms-item="3">
+                        <div class="product-image">🥗</div>
+                        <div class="product-info">
+                            <h3>Fruits & Légumes</h3>
+                            <p>Produits frais de saison, légumes bio et exotiques. 
+                               Approvisionnement direct des producteurs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Promotions -->
+        <section id="promotions" class="promotions">
+            <div class="container">
+                <h2 class="cms-editable" data-cms-field="promotions.title">Promotions du Mois</h2>
+                <div class="promo-content cms-editable" data-cms-field="promotions.content">
+                    <div class="promo-highlight">-20% sur tous les produits surgelés</div>
+                    <p>Profitez de nos offres exceptionnelles ce mois-ci ! 
+                       Remise de 20% sur notre gamme complète de produits surgelés. 
+                       Valable jusqu'au 31 de ce mois.</p>
+                    <div class="promo-highlight">Livraison gratuite dès 100€</div>
+                    <p>Pour toute commande supérieure à 100€, bénéficiez de la livraison 
+                       gratuite dans un rayon de 50km.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Actualités -->
+        <section id="actualites" class="news">
+            <div class="container">
+                <h2 class="cms-editable" data-cms-field="news.title">Actualités</h2>
+                <div class="news-grid">
+                    <article class="news-card cms-editable" data-cms-collection="news" data-cms-item="0">
+                        <div class="news-date">15 Décembre 2024</div>
+                        <div class="news-content">
+                            <h3>Nouveau Partenariat avec des Producteurs Bio</h3>
+                            <p>Nous sommes fiers d'annoncer notre nouveau partenariat avec 
+                               une coopérative de producteurs bio locaux. Découvrez nos 
+                               nouvelles références certifiées biologiques.</p>
+                        </div>
+                    </article>
+                    <article class="news-card cms-editable" data-cms-collection="news" data-cms-item="1">
+                        <div class="news-date">08 Décembre 2024</div>
+                        <div class="news-content">
+                            <h3>Extension de nos Heures de Livraison</h3>
+                            <p>Pour mieux vous servir, nous étendons nos créneaux de livraison 
+                               du lundi au samedi, de 6h à 20h. Commandes possibles jusqu'à 
+                               18h la veille.</p>
+                        </div>
+                    </article>
+                    <article class="news-card cms-editable" data-cms-collection="news" data-cms-item="2">
+                        <div class="news-date">01 Décembre 2024</div>
+                        <div class="news-content">
+                            <h3>Certification ISO 22000 Obtenue</h3>
+                            <p>Nous avons obtenu la certification ISO 22000 pour notre système 
+                               de management de la sécurité alimentaire, garantissant la 
+                               qualité de nos prestations.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Contact -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="cms-editable" data-cms-field="contact.title">Contact</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <h3>📍 Adresse</h3>
+                            <p class="cms-editable" data-cms-field="contact.address">
+                                123 Avenue du Commerce<br>
+                                Zone Industrielle Nord<br>
+                                75000 Paris, France
+                            </p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>📞 Téléphone</h3>
+                            <p class="cms-editable" data-cms-field="contact.phone">
+                                01 23 45 67 89
+                            </p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>✉️ Email</h3>
+                            <p class="cms-editable" data-cms-field="contact.email">
+                                contact@grossiste-alimentaire.fr
+                            </p>
+                        </div>
+                        <div class="horaires cms-editable" data-cms-field="contact.hours">
+                            <h3>🕒 Horaires d'ouverture</h3>
+                            <p><strong>Lundi - Vendredi :</strong> 6h00 - 18h00</p>
+                            <p><strong>Samedi :</strong> 7h00 - 16h00</p>
+                            <p><strong>Dimanche :</strong> Fermé</p>
+                        </div>
+                    </div>
+                    <form class="contact-form" onsubmit="handleFormSubmit(event)">
+                        <div class="form-group">
+                            <label for="nom">Nom *</label>
+                            <input type="text" id="nom" name="nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="entreprise">Entreprise</label>
+                            <input type="text" id="entreprise" name="entreprise">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Envoyer le message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Navigation</h3>
+                    <a href="#accueil">Accueil</a>
+                    <a href="#services">Services</a>
+                    <a href="#produits">Produits</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Informations</h3>
+                    <a href="#" class="cms-editable" data-cms-field="footer.legal_link">Mentions légales</a>
+                    <a href="#" class="cms-editable" data-cms-field="footer.privacy_link">Politique de confidentialité</a>
+                    <a href="#" class="cms-editable" data-cms-field="footer.cgv_link">CGV</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    <a href="#" class="cms-editable" data-cms-field="social.facebook">Facebook</a>
+                    <a href="#" class="cms-editable" data-cms-field="social.linkedin">LinkedIn</a>
+                    <a href="#" class="cms-editable" data-cms-field="social.instagram">Instagram</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="cms-editable" data-cms-field="footer.copyright">
+                    © 2024 Grossiste Alimentaire Pro. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bouton retour en haut -->
+    <a href="#header" class="back-to-top" id="backToTop">↑</a>
+
+    <script>
+        // Menu mobile toggle
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Smooth scrolling pour les liens internes
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Bouton retour en haut
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // Gestion du formulaire de contact
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert('Merci pour votre message ! Nous vous recontacterons dans les plus brefs délais.');
+            event.target.reset();
+        }
+
+        // Fermer le menu mobile quand on clique sur un lien
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('nav-menu').classList.remove('active');
+            });
+        });
+
+        // Animation au scroll (effet d'apparition)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Appliquer l'animation aux cartes
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.service-card, .product-card, .news-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+
+        // Données par défaut pour Sveltia CMS (structure JSON)
+        window.cmsData = {
+            site: {
+                name: "Grossiste Alimentaire Pro"
+            },
+            hero: {
+                title: "Votre Partenaire Grossiste Alimentaire de Confiance",
+                description: "Depuis plus de 20 ans, nous fournissons restaurants, épiceries et collectivités avec des produits alimentaires de qualité supérieure. Livraison rapide, prix compétitifs, service client exceptionnel.",
+                cta_text: "Demander un devis"
+            },
+            services: {
+                title: "Nos Services"
+            },
+            products: {
+                title: "Notre Catalogue"
+            },
+            promotions: {
+                title: "Promotions du Mois",
+                content: "Profitez de nos offres exceptionnelles ce mois-ci !"
+            },
+            news: {
+                title: "Actualités"
+            },
+            contact: {
+                title: "Contact",
+                address: "123 Avenue du Commerce\nZone Industrielle Nord\n75000 Paris, France",
+                phone: "01 23 45 67 89",
+                email: "contact@grossiste-alimentaire.fr",
+                hours: "Lundi - Vendredi : 6h00 - 18h00\nSamedi : 7h00 - 16h00\nDimanche : Fermé"
+            },
+            footer: {
+                copyright: "© 2024 Grossiste Alimentaire Pro. Tous droits réservés.",
+                legal_link: "Mentions légales",
+                privacy_link: "Politique de confidentialité",
+                cgv_link: "CGV"
+            },
+            social: {
+                facebook: "https://facebook.com/grossiste-alimentaire-pro",
+                linkedin: "https://linkedin.com/company/grossiste-alimentaire-pro",
+                instagram: "https://instagram.com/grossiste_alimentaire_pro"
+            }
+        };
+    </script>
+
+    <!-- Configuration Sveltia CMS -->
+    <script type="module">
+        // Configuration pour Sveltia CMS
+        window.CMS_CONFIG = {
+            backend: {
+                name: 'git-gateway',
+                branch: 'main'
+            },
+            media_folder: 'assets/images',
+            public_folder: '/assets/images',
+            collections: [
+                {
+                    name: 'pages',
+                    label: 'Pages',
+                    files: [
+                        {
+                            name: 'home',
+                            label: 'Page d\'accueil',
+                            file: 'content/home.md',
+                            fields: [
+                                {
+                                    name: 'hero_title',
+                                    label: 'Titre principal',
+                                    widget: 'string',
+                                    default: 'Votre Partenaire Grossiste Alimentaire de Confiance'
+                                },
+                                {
+                                    name: 'hero_description',
+                                    label: 'Description',
+                                    widget: 'text',
+                                    default: 'Depuis plus de 20 ans, nous fournissons restaurants, épiceries et collectivités avec des produits alimentaires de qualité supérieure.'
+                                },
+                                {
+                                    name: 'cta_text',
+                                    label: 'Texte bouton d\'action',
+                                    widget: 'string',
+                                    default: 'Demander un devis'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    name: 'services',
+                    label: 'Services',
+                    folder: 'content/services',
+                    create: true,
+                    fields: [
+                        {
+                            name: 'title',
+                            label: 'Titre',
+                            widget: 'string'
+                        },
+                        {
+                            name: 'icon',
+                            label: 'Icône (emoji)',
+                            widget: 'string'
+                        },
+                        {
+                            name: 'description',
+                            label: 'Description',
+                            widget: 'text'
+                        },
+                        {
+                            name: 'order',
+                            label: 'Ordre d\'affichage',
+                            widget: 'number',
+                            default: 1
+                        }
+                    ]
+                },
+                {
+                    name: 'products',
+                    label: 'Produits',
+                    folder: 'content/products',
+                    create: true,
+                    fields: [
+                        {
+                            name: 'title',
+                            label: 'Nom du produit',
+                            widget: 'string'
+                        },
+                        {
+                            name: 'category',
+                            label: 'Catégorie',
+                            widget: 'select',
+                            options: ['Viandes & Charcuterie', 'Produits Laitiers', 'Boulangerie & Pâtisserie', 'Fruits & Légumes', 'Épicerie', 'Surgelés', 'Boissons']
+                        },
+                        {
+                            name: 'description',
+                            label: 'Description',
+                            widget: 'text'
+                        },
+                        {
+                            name: 'image',
+                            label: 'Image du produit',
+                            widget: 'image',
+                            required: false
+                        },
+                        {
+                            name: 'price',
+                            label: 'Prix (optionnel)',
+                            widget: 'string',
+                            required: false
+                        },
+                        {
+                            name: 'featured',
+                            label: 'Produit vedette',
+                            widget: 'boolean',
+                            default: false
+                        }
+                    ]
+                },
+                {
+                    name: 'news',
+                    label: 'Actualités',
+                    folder: 'content/news',
+                    create: true,
+                    fields: [
+                        {
+                            name: 'title',
+                            label: 'Titre',
+                            widget: 'string'
+                        },
+                        {
+                            name: 'date',
+                            label: 'Date',
+                            widget: 'datetime'
+                        },
+                        {
+                            name: 'excerpt',
+                            label: 'Résumé',
+                            widget: 'text'
+                        },
+                        {
+                            name: 'body',
+                            label: 'Contenu',
+                            widget: 'markdown'
+                        },
+                        {
+                            name: 'featured_image',
+                            label: 'Image principale',
+                            widget: 'image',
+                            required: false
+                        }
+                    ]
+                },
+                {
+                    name: 'promotions',
+                    label: 'Promotions',
+                    folder: 'content/promotions',
+                    create: true,
+                    fields: [
+                        {
+                            name: 'title',
+                            label: 'Titre de la promotion',
+                            widget: 'string'
+                        },
+                        {
+                            name: 'discount',
+                            label: 'Pourcentage de réduction',
+                            widget: 'string'
+                        },
+                        {
+                            name: 'description',
+                            label: 'Description',
+                            widget: 'text'
+                        },
+                        {
+                            name: 'valid_until',
+                            label: 'Valable jusqu\'au',
+                            widget: 'datetime'
+                        },
+                        {
+                            name: 'conditions',
+                            label: 'Conditions',
+                            widget: 'text',
+                            required: false
+                        },
+                        {
+                            name: 'active',
+                            label: 'Promotion active',
+                            widget: 'boolean',
+                            default: true
+                        }
+                    ]
+                },
+                {
+                    name: 'settings',
+                    label: 'Paramètres',
+                    files: [
+                        {
+                            name: 'contact',
+                            label: 'Informations de contact',
+                            file: 'content/settings/contact.md',
+                            fields: [
+                                {
+                                    name: 'company_name',
+                                    label: 'Nom de l\'entreprise',
+                                    widget: 'string'
+                                },
+                                {
+                                    name: 'address',
+                                    label: 'Adresse complète',
+                                    widget: 'text'
+                                },
+                                {
+                                    name: 'phone',
+                                    label: 'Téléphone',
+                                    widget: 'string'
+                                },
+                                {
+                                    name: 'email',
+                                    label: 'Email',
+                                    widget: 'string'
+                                },
+                                {
+                                    name: 'hours',
+                                    label: 'Horaires d\'ouverture',
+                                    widget: 'object',
+                                    fields: [
+                                        {
+                                            name: 'monday_friday',
+                                            label: 'Lundi - Vendredi',
+                                            widget: 'string'
+                                        },
+                                        {
+                                            name: 'saturday',
+                                            label: 'Samedi',
+                                            widget: 'string'
+                                        },
+                                        {
+                                            name: 'sunday',
+                                            label: 'Dimanche',
+                                            widget: 'string'
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            name: 'social',
+                            label: 'Réseaux sociaux',
+                            file: 'content/settings/social.md',
+                            fields: [
+                                {
+                                    name: 'facebook',
+                                    label: 'Facebook URL',
+                                    widget: 'string',
+                                    required: false
+                                },
+                                {
+                                    name: 'linkedin',
+                                    label: 'LinkedIn URL',
+                                    widget: 'string',
+                                    required: false
+                                },
+                                {
+                                    name: 'instagram',
+                                    label: 'Instagram URL',
+                                    widget: 'string',
+                                    required: false
+                                },
+                                {
+                                    name: 'twitter',
+                                    label: 'Twitter URL',
+                                    widget: 'string',
+                                    required: false
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+    </script>
+</body>
+</html>
