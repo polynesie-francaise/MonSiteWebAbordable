@@ -1,42 +1,30 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Grossiste Alimentaire Pro</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - Grossiste Alimentaire</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-    <!-- Interface d'administration Sveltia CMS -->
-    <div id="sveltia-cms"></div>
+  <!-- Include the script that builds the page and powers Netlify CMS -->
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  
+  <!-- Script de personnalisation -->
+  <script>
+    // Configuration personnalisée
+    CMS.registerPreviewStyle("/admin/preview.css");
     
-    <!-- Script Sveltia CMS -->
-    <script type="module" src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
-    
-    <!-- Configuration personnalisée -->
-    <script>
-        // Configuration de l'interface
-        window.CMS_CONFIG = {
-            // Personnalisation de l'interface
-            display_url: window.location.origin,
-            logo_url: '/assets/images/logo.png', // Ajoutez votre logo ici
-            
-            // Configuration des couleurs de l'admin
-            theme: {
-                colors: {
-                    primary: '#2c5530',
-                    secondary: '#4a7c59',
-                    accent: '#ff6b35'
-                }
-            },
-            
-            // Messages personnalisés
-            messages: {
-                welcome: 'Bienvenue dans l\'administration de votre site grossiste alimentaire !',
-                login: 'Connectez-vous pour gérer votre site',
-                loading: 'Chargement en cours...'
-            }
-        };
-    </script>
+    // Callback pour l'authentification
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 </body>
 </html>
