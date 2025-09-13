@@ -199,3 +199,13 @@ public_folder: "/assets/uploads"
 ```
 
 Cette méthode fonctionne immédiatement sans configuration supplémentaire ! 🚀
+
+Install Auth0 
+
+Connect to your site
+To connect your site to Auth0:
+
+Navigate to Site configuration for the site you want to connect to Auth0.
+In the sidebar, select Auth0 by Okta under Extensions.
+Select Add a tenant and follow the prompts to connect to your Auth0 account.
+Select Save.

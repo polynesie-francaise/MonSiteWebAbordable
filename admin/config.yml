@@ -7,35 +7,47 @@ public_folder: "/assets/uploads"
 
 collections:
   # Configuration du site
-  - name: "settings"
+  - name: "config"
     label: "Configuration du site"
     files:
-      - name: "site_settings"
-        label: "Paramètres généraux"
+      - label: "Paramètres généraux"
+        name: "settings"
         file: "_data/settings.json"
         fields:
           - { label: "Nom du site", name: "siteName", widget: "string" }
           - { label: "Logo", name: "logo", widget: "image", required: false }
-          - { label: "Couleur principale", name: "primaryColor", widget: "color", default: "#007bff" }
-          - { label: "Couleur secondaire", name: "secondaryColor", widget: "color", default: "#6c757d" }
-          - { label: "Couleur d'accent", name: "accentColor", widget: "color", default: "#28a745" }
+          - { label: "Couleur principale", name: "primaryColor", widget: "string", default: "#007bff" }
+          - { label: "Couleur secondaire", name: "secondaryColor", widget: "string", default: "#6c757d" }
+          - { label: "Couleur d'accent", name: "accentColor", widget: "string", default: "#28a745" }
           
-      - name: "homepage"
-        label: "Page d'accueil"
+      - label: "Page d'accueil"
+        name: "homepage"
         file: "_data/homepage.json"
         fields:
           - { label: "Titre principal", name: "title", widget: "string" }
           - { label: "Sous-titre", name: "subtitle", widget: "string" }
           - { label: "Contenu", name: "content", widget: "markdown" }
           
-      - name: "contact"
-        label: "Informations de contact"
+      - label: "Informations de contact"
+        name: "contact"
         file: "_data/contact.json"
         fields:
           - { label: "Adresse", name: "address", widget: "text" }
           - { label: "Téléphone", name: "phone", widget: "string" }
           - { label: "Email", name: "email", widget: "string" }
           - { label: "Horaires", name: "hours", widget: "markdown" }
+
+  # Catégories
+  - name: "categories"
+    label: "Catégories"
+    folder: "_categories"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nom de la catégorie", name: "name", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Image", name: "image", widget: "image", required: false }
 
   # Produits
   - name: "products"
@@ -46,11 +58,13 @@ collections:
     fields:
       - { label: "Nom du produit", name: "name", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Prix", name: "price", widget: "number", value_type: "float" }
-      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Description courte", name: "description", widget: "text" }
+      - { label: "Prix", name: "price", widget: "number", value_type: "float", min: 0 }
+      - { label: "Image principale", name: "image", widget: "image" }
       - { label: "Catégorie", name: "category", widget: "select", options: ["electronique", "vetements", "maison"] }
       - { label: "En stock", name: "in_stock", widget: "boolean", default: true }
+      - { label: "Produit vedette", name: "featured", widget: "boolean", default: false }
+      - { label: "Description détaillée", name: "body", widget: "markdown", required: false }
 
   # Services
   - name: "services"
@@ -59,10 +73,30 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Nom du service", name: "title", widget: "string" }
+      - { label: "Titre du service", name: "title", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string" }
       - { label: "Description", name: "content", widget: "markdown" }
       - { label: "Prix", name: "price", widget: "string" }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - { label: "Ordre d'affichage", name: "order", widget: "number", default: 1 }
+
+  # Promotions
+  - name: "promotions"
+    label: "Promotions"
+    folder: "_promotions"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titre de la promotion", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Produit (nom)", name: "productName", widget: "string" }
+      - { label: "Image du produit", name: "productImage", widget: "image" }
+      - { label: "Prix original", name: "originalPrice", widget: "number", value_type: "float" }
+      - { label: "Pourcentage de réduction", name: "discount", widget: "string" }
+      - { label: "Nouveau prix", name: "newPrice", widget: "number", value_type: "float", min: 0 }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Date de fin", name: "endDate", widget: "string" }
+      - { label: "Promotion active", name: "active", widget: "boolean", default: true }
 
   # Actualités
   - name: "news"
@@ -71,9 +105,18 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Titre de l'article", name: "title", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Image", name: "image", widget: "image" }
-      - { label: "Contenu", name: "body", widget: "markdown" }
+      - { label: "Date de publication", name: "date", widget: "datetime" }
+      - { label: "Description courte", name: "description", widget: "text" }
+      - { label: "Image de couverture", name: "image", widget: "image" }
+      - { label: "Contenu de l'article", name: "body", widget: "markdown" }
+      - { label: "Auteur", name: "author", widget: "string", required: false }
+      - { label: "Article en vedette", name: "featured", widget: "boolean", default: false }
+
+# Configuration de l'éditeur
+editor:
+  preview: false
+
+# Mode de publication
+publish_mode: editorial_workflow
