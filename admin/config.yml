@@ -1,15 +1,12 @@
 backend:
   name: git-gateway
   branch: main
-  
-local_backend: true
+
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
-site_url: https://ahsingimport.netlify.app
-display_url: https://ahsingimport.netlify.app
 
 collections:
-  # Configuration générale du site
+  # Configuration du site
   - name: "settings"
     label: "Configuration du site"
     files:
@@ -38,19 +35,7 @@ collections:
           - { label: "Adresse", name: "address", widget: "text" }
           - { label: "Téléphone", name: "phone", widget: "string" }
           - { label: "Email", name: "email", widget: "string" }
-          - { label: "Horaires d'ouverture", name: "hours", widget: "markdown" }
-
-  # Catégories de produits
-  - name: "categories"
-    label: "Catégories"
-    folder: "_categories"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Nom de la catégorie", name: "name", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string", pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Le slug doit être en minuscules, sans espaces, avec des tirets'] }
-      - { label: "Description", name: "description", widget: "text", required: false }
-      - { label: "Image", name: "image", widget: "image", required: false }
+          - { label: "Horaires", name: "hours", widget: "markdown" }
 
   # Produits
   - name: "products"
@@ -60,15 +45,12 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Nom du produit", name: "name", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string", pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Le slug doit être en minuscules, sans espaces, avec des tirets'] }
-      - { label: "Description courte", name: "description", widget: "text" }
-      - { label: "Prix", name: "price", widget: "number", value_type: "float", min: 0 }
-      - { label: "Image principale", name: "image", widget: "image" }
-      - { label: "Catégorie", name: "category", widget: "relation", collection: "categories", search_fields: ["name"], value_field: "slug", display_fields: ["name"] }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Prix", name: "price", widget: "number", value_type: "float" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Catégorie", name: "category", widget: "select", options: ["electronique", "vetements", "maison"] }
       - { label: "En stock", name: "in_stock", widget: "boolean", default: true }
-      - { label: "Produit vedette", name: "featured", widget: "boolean", default: false, required: false }
-      - { label: "Galerie d'images", name: "gallery", widget: "list", field: { label: "Image", name: "image", widget: "image" }, required: false }
-      - { label: "Description détaillée", name: "body", widget: "markdown", required: false }
 
   # Services
   - name: "services"
@@ -77,29 +59,10 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Titre du service", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string", pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Le slug doit être en minuscules, sans espaces, avec des tirets'] }
+      - { label: "Nom du service", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
       - { label: "Description", name: "content", widget: "markdown" }
       - { label: "Prix", name: "price", widget: "string" }
-      - { label: "Image", name: "image", widget: "image", required: false }
-      - { label: "Ordre d'affichage", name: "order", widget: "number", default: 1, value_type: "int" }
-
-  # Promotions
-  - name: "promotions"
-    label: "Promotions"
-    folder: "_promotions"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Titre de la promotion", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string", pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Le slug doit être en minuscules, sans espaces, avec des tirets'] }
-      - { label: "Produit en promotion", name: "product", widget: "relation", collection: "products", search_fields: ["name"], value_field: "slug", display_fields: ["name"] }
-      - { label: "Pourcentage de réduction", name: "discount", widget: "number", value_type: "int", min: 1, max: 100 }
-      - { label: "Nouveau prix", name: "newPrice", widget: "number", value_type: "float", min: 0 }
-      - { label: "Description de la promotion", name: "description", widget: "text" }
-      - { label: "Date de début", name: "startDate", widget: "datetime" }
-      - { label: "Date de fin", name: "endDate", widget: "datetime" }
-      - { label: "Promotion active", name: "active", widget: "boolean", default: true }
 
   # Actualités
   - name: "news"
@@ -108,34 +71,9 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Titre de l'article", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string", pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Le slug doit être en minuscules, sans espaces, avec des tirets'] }
-      - { label: "Date de publication", name: "date", widget: "datetime", default: "" }
-      - { label: "Description courte", name: "description", widget: "text" }
-      - { label: "Image de couverture", name: "image", widget: "image" }
-      - { label: "Contenu de l'article", name: "body", widget: "markdown" }
-      - { label: "Auteur", name: "author", widget: "string", required: false }
-      - { label: "Tags", name: "tags", widget: "list", allow_add: true, required: false }
-      - { label: "Article en vedette", name: "featured", widget: "boolean", default: false, required: false }
-
-  # Pages personnalisées
-  - name: "pages"
-    label: "Pages personnalisées"
-    folder: "_pages"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Titre de la page", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string", pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Le slug doit être en minuscules, sans espaces, avec des tirets'] }
-      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Image", name: "image", widget: "image" }
       - { label: "Contenu", name: "body", widget: "markdown" }
-      - { label: "Image de bannière", name: "banner", widget: "image", required: false }
-      - { label: "Afficher dans le menu", name: "show_in_menu", widget: "boolean", default: false }
-      - { label: "Ordre dans le menu", name: "menu_order", widget: "number", default: 10, required: false }
-
-# Configuration de l'éditeur
-editor:
-  preview: false
-
-# Paramètres locaux
-publish_mode: editorial_workflow
