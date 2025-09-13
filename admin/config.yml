@@ -119,4 +119,4 @@ editor:
   preview: false
 
 # Mode de publication
-publish_mode: editorial_workflow
+publish_mode: simple
