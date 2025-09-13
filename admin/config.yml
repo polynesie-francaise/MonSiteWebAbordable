@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: polynesie-francaise/MonSiteWebAbordable
+  name: git-gateway
   branch: main
   
 local_backend: true
