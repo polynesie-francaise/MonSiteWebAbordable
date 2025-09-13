@@ -209,3 +209,48 @@ Navigate to Site configuration for the site you want to connect to Auth0.
 In the sidebar, select Auth0 by Okta under Extensions.
 Select Add a tenant and follow the prompts to connect to your Auth0 account.
 Select Save.
+
+deprecier ?
+netlify login
+netlify link
+
+
+git lfs install
+# Traquer les fichiers volumineux (images)
+git lfs track "*.jpg" "*.png" "*.gif"
+
+
+git checkout main
+git pull origin main
+git merge --squash staging
+git commit -m "Publication groupée CMS"
+git push origin main
+
+
+Option 1 : CLI Git
+
+# Se placer sur la branche staging
+git checkout staging
+git pull origin staging
+
+# Aller sur main
+git checkout main
+git pull origin main
+
+# Squash merge pour tout combiner en un commit unique
+git merge --squash staging
+
+# Committer le merge
+git commit -m "Publication groupée CMS"
+
+# Push vers main → déclenche 1 build
+git push origin main
+
+
+Option 2 : GitHub UI
+
+Crée une PR de staging → main.
+
+Quand tu merges, choisis “Squash and merge” pour combiner tous les commits.
+
+Cela déclenche 1 seul build Netlify pour toutes les modifications.

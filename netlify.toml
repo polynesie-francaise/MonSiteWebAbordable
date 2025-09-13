@@ -1,10 +1,44 @@
+# Configuration de production (branche main)
 [build]
   publish = "."
+  command = "echo 'Build terminé'"
 
+# Configuration pour la branche staging (prévisualisation)
+[context.staging]
+  publish = "."
+  command = "echo 'Build staging terminé'"
+
+# Configuration pour les deploy previews (pull requests)
+[context.deploy-preview]
+  publish = "."
+  command = "echo 'Deploy preview terminé'"
+
+# Redirections pour le CMS
 [[redirects]]
   from = "/admin/*"
-  to = "/admin/index.html" 
+  to = "/admin/index.html"
   status = 200
 
+# Variables d'environnement
 [build.environment]
   NODE_VERSION = "18"
+
+# Configuration Git LFS (Large Media)
+[build.processing]
+  skip_processing = false
+
+[build.processing.images]
+  compress = true
+
+# Headers pour les performances
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
