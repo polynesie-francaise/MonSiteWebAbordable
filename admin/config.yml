@@ -2,23 +2,29 @@ backend:
   name: git-gateway
   branch: main
 
+# Workflow avec branche staging pour économiser les builds
+publish_mode: editorial_workflow
+
+# Configuration Netlify Large Media
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
+media_library:
+  name: netlify-large-media
+  config:
+    publicKey: your-public-key
 
 collections:
-  # Configuration du site
+  # Configuration du site (simplifié)
   - name: "config"
-    label: "Configuration du site"
+    label: "⚙️ Configuration"
     files:
-      - label: "Paramètres généraux"
+      - label: "Paramètres du site"
         name: "settings"
         file: "_data/settings.json"
         fields:
           - { label: "Nom du site", name: "siteName", widget: "string" }
-          - { label: "Logo", name: "logo", widget: "image", required: false }
-          - { label: "Couleur principale", name: "primaryColor", widget: "string", default: "#007bff" }
-          - { label: "Couleur secondaire", name: "secondaryColor", widget: "string", default: "#6c757d" }
-          - { label: "Couleur d'accent", name: "accentColor", widget: "string", default: "#28a745" }
+          - { label: "Couleur principale", name: "primaryColor", widget: "color", default: "#007bff" }
+          - { label: "Logo (optionnel)", name: "logo", widget: "image", required: false }
           
       - label: "Page d'accueil"
         name: "homepage"
@@ -26,97 +32,92 @@ collections:
         fields:
           - { label: "Titre principal", name: "title", widget: "string" }
           - { label: "Sous-titre", name: "subtitle", widget: "string" }
-          - { label: "Contenu", name: "content", widget: "markdown" }
+          - { label: "Description", name: "content", widget: "markdown" }
           
-      - label: "Informations de contact"
+      - label: "Contact"
         name: "contact"
         file: "_data/contact.json"
         fields:
-          - { label: "Adresse", name: "address", widget: "text" }
           - { label: "Téléphone", name: "phone", widget: "string" }
           - { label: "Email", name: "email", widget: "string" }
-          - { label: "Horaires", name: "hours", widget: "markdown" }
+          - { label: "Adresse", name: "address", widget: "text" }
 
-  # Catégories
-  - name: "categories"
-    label: "Catégories"
-    folder: "_categories"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Nom de la catégorie", name: "name", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Description", name: "description", widget: "text", required: false }
-      - { label: "Image", name: "image", widget: "image", required: false }
-
-  # Produits
+  # Produits (version simplifiée avec slug automatique)
   - name: "products"
-    label: "Produits"
+    label: "🛍️ Produits"
     folder: "_products"
     create: true
-    slug: "{{slug}}"
+    slug: "{{fields.name | slugify}}"
     fields:
       - { label: "Nom du produit", name: "name", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Description courte", name: "description", widget: "text" }
-      - { label: "Prix", name: "price", widget: "number", value_type: "float", min: 0 }
+      - { label: "Prix (€)", name: "price", widget: "number", value_type: "float", min: 0 }
+      - { label: "Description", name: "description", widget: "text" }
       - { label: "Image principale", name: "image", widget: "image" }
-      - { label: "Catégorie", name: "category", widget: "select", options: ["electronique", "vetements", "maison"] }
-      - { label: "En stock", name: "in_stock", widget: "boolean", default: true }
-      - { label: "Produit vedette", name: "featured", widget: "boolean", default: false }
-      - { label: "Description détaillée", name: "body", widget: "markdown", required: false }
+      - label: "Catégorie"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "📱 Électronique", value: "electronique" }
+          - { label: "👕 Vêtements", value: "vetements" }
+          - { label: "🏠 Maison", value: "maison" }
+      # Champs optionnels cachés par défaut
+      - { label: "En stock", name: "in_stock", widget: "boolean", default: true, required: false }
+      - { label: "Produit vedette", name: "featured", widget: "boolean", default: false, required: false }
+      - { label: "Images supplémentaires (optionnel)", name: "gallery", widget: "list", field: {name: "image", widget: "image"}, required: false }
+      - { label: "Description détaillée (optionnel)", name: "body", widget: "markdown", required: false }
 
-  # Services
+  # Services (simplifié)
   - name: "services"
-    label: "Services"
+    label: "🔧 Services"
     folder: "_services"
     create: true
-    slug: "{{slug}}"
+    slug: "{{fields.title | slugify}}"
     fields:
-      - { label: "Titre du service", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Nom du service", name: "title", widget: "string" }
+      - { label: "Prix", name: "price", widget: "string", default: "Sur devis" }
       - { label: "Description", name: "content", widget: "markdown" }
-      - { label: "Prix", name: "price", widget: "string" }
-      - { label: "Image", name: "image", widget: "image", required: false }
-      - { label: "Ordre d'affichage", name: "order", widget: "number", default: 1 }
+      # Champs optionnels
+      - { label: "Image (optionnel)", name: "image", widget: "image", required: false }
+      - { label: "Ordre d'affichage", name: "order", widget: "number", default: 1, required: false }
 
-  # Promotions
+  # Promotions (simplifié)
   - name: "promotions"
-    label: "Promotions"
+    label: "🏷️ Promotions"
     folder: "_promotions"
     create: true
-    slug: "{{slug}}"
+    slug: "{{fields.title | slugify}}"
     fields:
       - { label: "Titre de la promotion", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Produit (nom)", name: "productName", widget: "string" }
+      - { label: "Nom du produit", name: "productName", widget: "string" }
+      - { label: "Prix original (€)", name: "originalPrice", widget: "number", value_type: "float" }
+      - { label: "Prix promotionnel (€)", name: "newPrice", widget: "number", value_type: "float" }
       - { label: "Image du produit", name: "productImage", widget: "image" }
-      - { label: "Prix original", name: "originalPrice", widget: "number", value_type: "float" }
-      - { label: "Pourcentage de réduction", name: "discount", widget: "string" }
-      - { label: "Nouveau prix", name: "newPrice", widget: "number", value_type: "float", min: 0 }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Date de fin", name: "endDate", widget: "string" }
-      - { label: "Promotion active", name: "active", widget: "boolean", default: true }
+      # Champs optionnels/automatiques
+      - { label: "Réduction", name: "discount", widget: "string", default: "À calculer", required: false }
+      - { label: "Description (optionnel)", name: "description", widget: "text", required: false }
+      - { label: "Date de fin", name: "endDate", widget: "string", default: "À définir", required: false }
+      - { label: "Active", name: "active", widget: "boolean", default: true, required: false }
 
-  # Actualités
+  # Actualités (simplifié)
   - name: "news"
-    label: "Actualités"
+    label: "📰 Actualités"
     folder: "_news"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{fields.title | slugify}}"
     fields:
       - { label: "Titre de l'article", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Date de publication", name: "date", widget: "datetime" }
       - { label: "Description courte", name: "description", widget: "text" }
       - { label: "Image de couverture", name: "image", widget: "image" }
       - { label: "Contenu de l'article", name: "body", widget: "markdown" }
-      - { label: "Auteur", name: "author", widget: "string", required: false }
-      - { label: "Article en vedette", name: "featured", widget: "boolean", default: false }
+      # Champs automatiques/optionnels
+      - { label: "Date", name: "date", widget: "datetime", default: "", required: false }
+      - { label: "Auteur (optionnel)", name: "author", widget: "string", required: false }
+      - { label: "Article en vedette", name: "featured", widget: "boolean", default: false, required: false }
 
-# Configuration de l'éditeur
+# Interface simplifiée
 editor:
   preview: false
 
-# Mode de publication
-publish_mode: editorial_workflow
+# Configuration du workflow éditorial
+editorial_workflow:
+  publish_mode: editorial_workflow
