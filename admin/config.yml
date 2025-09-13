@@ -103,7 +103,7 @@ collections:
     label: "📰 Actualités"
     folder: "_news"
     create: true
-    slug: "{{fields.title | slugify}}"
+    slug: "{{title}}"
     fields:
       - { label: "Titre de l'article", name: "title", widget: "string" }
       - { label: "Description courte", name: "description", widget: "text" }
